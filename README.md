@@ -17,7 +17,7 @@ docker run  \
 --env document_root=/src `#Document root for apache. Relative to project root` \
 --env host_uid=1000 \
 --env host_gid=1000 \
-merzley/lamp-php7.2
+merzley/lamp-bitrix
 ```
 
 ## Apache config
