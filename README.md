@@ -103,6 +103,7 @@ mbstring.func_overload = 2
 default_charset = UTF-8
 mbstring.internal_encoding = UTF-8
 date.timezone = Europe/Moscow
+max_input_vars = 10000
 ```
 
 ## XDebug config
