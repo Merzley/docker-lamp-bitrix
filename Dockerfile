@@ -78,4 +78,5 @@ CMD groupadd -g $host_gid container_group && \
     service apache2 start && \
     service mysql start && \
     /bin/bash /mysql_user_script.sh && \
-    su container_user
+    su container_user && \
+    /bin/bash
