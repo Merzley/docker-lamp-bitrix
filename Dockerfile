@@ -10,7 +10,7 @@ ENV document_root="" \
     host_uid="" \
     host_gid="" \
     xdebug_remote_host="" \
-    PHP_IDE_CONFIG="" \
+    PHP_IDE_CONFIG=""
 
 SHELL ["/bin/bash", "-c"]
 
