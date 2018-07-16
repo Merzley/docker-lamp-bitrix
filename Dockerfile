@@ -8,7 +8,9 @@ VOLUME /var/www \
 
 ENV document_root="" \
     host_uid="" \
-    host_gid=""
+    host_gid="" \
+    xdebug_remote_host="" \
+    PHP_IDE_CONFIG="" \
 
 SHELL ["/bin/bash", "-c"]
 
@@ -79,6 +81,7 @@ CMD groupadd -g $host_gid container_group && \
     mkdir /home/container_user && \
     chown container_user:container_group /home/container_user && \
     sed -i "s|{{document_root}}|$document_root|" /etc/apache2/apache2.conf && \
+    echo 'xdebug.remote_host = '$xdebug_remote_host > /etc/php/7.0/cli/conf.d/21-xdebug.ini && \
     service apache2 start && \
     service mysql start && \
     /bin/bash /mysql_user_script.sh && \
