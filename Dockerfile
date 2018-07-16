@@ -16,6 +16,10 @@ COPY files /files
 
 RUN cp /files/mysql_user_script.sh / && \
 ##############################
+#       APT REPOSITORY       #
+##############################
+    cp /files/etc/apt/sources.list /etc/apt/sources.list && \
+##############################
 #          TIMEZONE          #
 ##############################
     unlink /etc/localtime && \
