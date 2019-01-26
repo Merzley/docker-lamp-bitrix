@@ -10,7 +10,8 @@ ENV document_root="" \
     host_uid="1000" \
     host_gid="1000" \
     xdebug_remote_host="172.17.0.1" \
-    PHP_IDE_CONFIG="serverName=server"
+    PHP_IDE_CONFIG="serverName=server" \
+    xdebug_port="9000"
 
 SHELL ["/bin/bash", "-c"]
 
@@ -89,7 +90,10 @@ CMD groupadd -g $host_gid container_group && \
     mkdir /home/container_user && \
     chown container_user:container_group /home/container_user && \
     sed -i "s|{{document_root}}|$document_root|" /etc/apache2/apache2.conf && \
-    echo 'xdebug.remote_host = '$xdebug_remote_host > /etc/php/7.0/cli/conf.d/21-xdebug.ini && \
+    sed -i "s|{{xdebug_port}}|$xdebug_port|" /etc/php/7.0/apache2/conf.d/20-xdebug.ini && \
+    sed -i "s|{{xdebug_remote_host}}|$xdebug_remote_host|" /etc/php/7.0/apache2/conf.d/20-xdebug.ini && \
+    sed -i "s|{{xdebug_port}}|$xdebug_port|" /etc/php/7.0/cli/conf.d/20-xdebug.ini && \
+    sed -i "s|{{xdebug_remote_host}}|$xdebug_remote_host|" /etc/php/7.0/cli/conf.d/20-xdebug.ini && \
     service apache2 start && \
     service mysql start && \
     /bin/bash /mysql_user_script.sh && \
