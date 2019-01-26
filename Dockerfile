@@ -28,12 +28,15 @@ RUN cp /files/mysql_user_script.sh / && \
     unlink /etc/localtime && \
     ln -s /usr/share/zoneinfo/Europe/Moscow /etc/localtime && \
 ##############################
-#      MYSQL REPOSITORY      #
+#           TOOLS            #
 ##############################
     apt-get -y update && \
     apt-get -y install gnupg && \
+    apt-get -y install wget && \
+##############################
+#      MYSQL REPOSITORY      #
+##############################
     apt-key add /files/mysql_pubkey.asc && \
-    apt-get -y remove gnupg && \
     cp -r /files/etc/apt/* /etc/apt && \
 ##############################
 #        SYSTEM UPDATE       #
@@ -63,6 +66,10 @@ RUN cp /files/mysql_user_script.sh / && \
 ##############################
 #            PHP             #
 ##############################
+    wget -q https://packages.sury.org/php/apt.gpg -O- | apt-key add - && \
+    echo "deb https://packages.sury.org/php/ stretch main" | tee /etc/apt/sources.list.d/php.list && \
+    apt-get -y update && \
+    #
     apt-get -y install php7.0 && \
     apt-get -y install libapache2-mod-php7.0 && \
     apt-get -y install php7.0-mbstring && \
