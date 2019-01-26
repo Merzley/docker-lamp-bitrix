@@ -1,4 +1,4 @@
-FROM debian:testing-slim
+FROM debian:testing
 
 EXPOSE 80/tcp
 EXPOSE 3306/tcp
@@ -67,7 +67,15 @@ RUN cp /files/mysql_user_script.sh / && \
     apt-get -y install php7.0-mbstring && \
     apt-get -y install php7.0-gd && \
     apt-get -y install php7.0-mysql && \
-    apt-get -y install php7.0-xdebug && \
+    #<xdebug>
+    apt-get -y install php7.0-xml && \
+    apt-get -y install php7.0-dev && \
+    apt-get -y install php-pear && \
+    pecl channel-update pecl.php.net && \
+    pecl install xdebug && \
+    apt-get -y remove php-pear && \
+    apt-get -y remove php7.0-dev && \
+    #</xdebug>
     cp -r /files/etc/php/* /etc/php && \
 ##############################
 #            CLEAN           #
