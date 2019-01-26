@@ -7,10 +7,10 @@ VOLUME /var/www \
        /var/lib/mysql
 
 ENV document_root="" \
-    host_uid="" \
-    host_gid="" \
-    xdebug_remote_host="" \
-    PHP_IDE_CONFIG=""
+    host_uid="1000" \
+    host_gid="1000" \
+    xdebug_remote_host="172.17.0.1" \
+    PHP_IDE_CONFIG="serverName=server"
 
 SHELL ["/bin/bash", "-c"]
 
