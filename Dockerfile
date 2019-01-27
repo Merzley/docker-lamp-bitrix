@@ -70,19 +70,19 @@ RUN cp /files/mysql_user_script.sh / && \
     echo "deb https://packages.sury.org/php/ stretch main" | tee /etc/apt/sources.list.d/php.list && \
     apt-get -y update && \
     #
-    apt-get -y install php7.0 && \
-    apt-get -y install libapache2-mod-php7.0 && \
-    apt-get -y install php7.0-mbstring && \
-    apt-get -y install php7.0-gd && \
-    apt-get -y install php7.0-mysql && \
+    apt-get -y install php7.1 && \
+    apt-get -y install libapache2-mod-php7.1 && \
+    apt-get -y install php7.1-mbstring && \
+    apt-get -y install php7.1-gd && \
+    apt-get -y install php7.1-mysql && \
     #<xdebug>
-    apt-get -y install php7.0-xml && \
-    apt-get -y install php7.0-dev && \
+    apt-get -y install php7.1-xml && \
+    apt-get -y install php7.1-dev && \
     apt-get -y install php-pear && \
     pecl channel-update pecl.php.net && \
     pecl install xdebug && \
     apt-get -y remove php-pear && \
-    apt-get -y remove php7.0-dev && \
+    apt-get -y remove php7.1-dev && \
     #</xdebug>
     cp -r /files/etc/php/* /etc/php && \
 ##############################
@@ -97,10 +97,10 @@ CMD groupadd -g $host_gid container_group && \
     mkdir /home/container_user && \
     chown container_user:container_group /home/container_user && \
     sed -i "s|{{document_root}}|$document_root|" /etc/apache2/apache2.conf && \
-    sed -i "s|{{xdebug_port}}|$xdebug_port|" /etc/php/7.0/apache2/conf.d/20-xdebug.ini && \
-    sed -i "s|{{xdebug_remote_host}}|$xdebug_remote_host|" /etc/php/7.0/apache2/conf.d/20-xdebug.ini && \
-    sed -i "s|{{xdebug_port}}|$xdebug_port|" /etc/php/7.0/cli/conf.d/20-xdebug.ini && \
-    sed -i "s|{{xdebug_remote_host}}|$xdebug_remote_host|" /etc/php/7.0/cli/conf.d/20-xdebug.ini && \
+    sed -i "s|{{xdebug_port}}|$xdebug_port|" /etc/php/7.1/apache2/conf.d/20-xdebug.ini && \
+    sed -i "s|{{xdebug_remote_host}}|$xdebug_remote_host|" /etc/php/7.1/apache2/conf.d/20-xdebug.ini && \
+    sed -i "s|{{xdebug_port}}|$xdebug_port|" /etc/php/7.1/cli/conf.d/20-xdebug.ini && \
+    sed -i "s|{{xdebug_remote_host}}|$xdebug_remote_host|" /etc/php/7.1/cli/conf.d/20-xdebug.ini && \
     service apache2 start && \
     service mysql start && \
     /bin/bash /mysql_user_script.sh && \
