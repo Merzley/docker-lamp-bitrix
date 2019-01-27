@@ -15,8 +15,11 @@ docker run  \
 -v /path/to/db/storage:/var/lib/mysql \
 -v /path/to/project/root:/var/www \
 --env document_root=/src `#Document root for apache. Relative to project root` \
---env host_uid=1000 \
---env host_gid=1000 \
+--env host_uid=1000 `#Optional. 1000 is default value` \
+--env host_gid=1000 `#Optional. 1000 is default value` \
+--env PHP_IDE_CONFIG=serverName=server `#Optional. serverName=server is default value` \
+--env xdebug_remote_host=172.17.0.1 `#Optional. 172.17.0.1 is default value` \
+--env xdebug_port=9000 `#Optional. 9000 is default value` \
 merzley/lamp-bitrix
 ```
 
@@ -121,7 +124,8 @@ xdebug.remote_autostart = on
 xdebug.remote_enable = on
 xdebug.remote_handler = dbgp
 xdebug.remote_connect_back = on
-xdebug.remote_port = 9000
+xdebug.remote_port = {{xdebug_port}}
 xdebug.remote_mode = req
 xdebug.idekey = XDEBUG_IDE_KEY
+xdebug.remote_host = {{xdebug_remote_host}}
 ```
